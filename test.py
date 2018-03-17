@@ -79,6 +79,7 @@ def find_op1_mount():
         dirs = [x[1] for x in mounts]
 
     for dir in dirs:
+        dir = re.findall('([^\s]+)|$', dir)[0]
         subdirs = get_visible_folders(dir)
         if set(subdirs) & OP1_BASE_DIRS == OP1_BASE_DIRS:
             return dir
