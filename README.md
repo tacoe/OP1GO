@@ -8,6 +8,7 @@ Backup your OP-1 on the go with this code and a Raspberry Pi Zero.
 * `sudo apt-get update`
 * `sudo apt-get install python3-pip git`
 * `git clone https://github.com/tacoe/op1go`
+* `cd op1go`
 * `pip3 install pyusb`
 
 ## Setup Pi/SD card

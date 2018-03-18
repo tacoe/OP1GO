@@ -56,9 +56,9 @@ def unmountdevice(target):
 
 def getmountpath():
   o = os.popen('readlink -f /dev/disk/by-id/' + USBID_OP1).read()
-  if o.contains(USBID_OP1):
+  if USBID_OP1 in o:
     raise RuntimeError("Error getting OP-1 mount path: {}".format(o))
-  else
+  else:
     return o.rstrip()
 
 # copying
