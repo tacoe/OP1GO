@@ -1,6 +1,6 @@
 # OP1GO
 
-Ultraportable backups for OP-1 with this tool and a Raspberry Pi Zero.
+Ultraportable backups for Teenage Engineering's OP-1 with this tool and a Raspberry Pi Zero.
 
 ## Setup
 
