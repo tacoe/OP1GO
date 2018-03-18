@@ -42,9 +42,8 @@ def wait_for_connection():
 # mounting
 def mountdevice(source, target, fs, options=''):
   ret = os.system('mount {} {}'.format(source, target))
-  if ret != 0:
+  if ret not in (0, 8192):
     raise RuntimeError("Error mounting {} on {}: {}".format(source, target, ret))
-
 
 def unmountdevice(target):
   ret = os.system('umount {}'.format(target))
@@ -82,7 +81,7 @@ def backup_files(source, destination):
   dstroot = os.path.join(destination, datetime.now().strftime(BACKUP_DIR_FORMAT))
   forcedir(dstroot)
   for node in get_visible_children(source):
-    src = os.path.join(mount, node)
+    src = os.path.join(source, node)
     dst = os.path.join(dstroot, node)
     forcedir(dst)
     print("from: %s" % src)
@@ -95,18 +94,22 @@ forcedir(BACKUPS_DIR)
 forcedir(MOUNT_DIR)
 
 # wait until OP-1 is connected
-print("")
+print(" > Starting - waiting for OP-1 to connect")
 ensure_connection()
 
 # mount OP-1
 mountpath = getmountpath()
-print("Mountpath: %s" % mountpath)
+print(" > OP-1 device path: %s" % mountpath)
 mountdevice(mountpath, MOUNT_DIR, 'ext4', 'rw')
+print(" > Device mounted at %s" % MOUNT_DIR)
 
 # copy files to local storage
+print(" > Copying files...")
 backup_files(MOUNT_DIR, BACKUPS_DIR)
 
 # unmount OP-1
+print(" > Unmounting OP-1")
 unmountdevice(MOUNT_DIR)
+print(" > Done.")
 
 
