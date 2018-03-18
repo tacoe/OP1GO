@@ -6,16 +6,12 @@ import re
 import time
 import usb.core
 import usb.util
-import hashlib
-import subprocess
 import shutil
-import ctypes
 from datetime import datetime
 
-VENDOR_TE = 0x2367
-PRODUCT_OP1 = 0x0002
+VENDOR = 0x2367
+PRODUCT = 0x0002
 USBID_OP1 = "*Teenage_OP-1*"
-OP1_BASE_DIRS = set(['tape', 'album', 'synth', 'drum'])
 MOUNT_DIR = "/media/op1"
 BACKUP_DIR_FORMAT = "%Y-%m-%d (%H%M%S)"
 HOME = "/op1go"
@@ -28,7 +24,7 @@ def ensure_connection():
     wait_for_connection()
 
 def is_connected():
-  return usb.core.find(idVendor=VENDOR_TE, idProduct=PRODUCT_OP1) is not None
+  return usb.core.find(idVendor=VENDOR, idProduct=PRODUCT) is not None
 
 def wait_for_connection():
   try:
@@ -112,9 +108,9 @@ def blinkyay():
     time.sleep(0.01)
 
 
-####################################################################################
-# create mount point and local backup folders
+## Main ##
 
+# create mount point and local backup folders
 blinklong()
 forcedir(BACKUPS_DIR)
 forcedir(MOUNT_DIR)
