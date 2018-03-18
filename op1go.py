@@ -83,10 +83,9 @@ def backup_files(source, destination):
   for node in get_visible_children(source):
     src = os.path.join(source, node)
     dst = os.path.join(dstroot, node)
+    print(" . from: {} to {}".format(src, dst))
     forcedir(dst)
-    print("from: %s" % src)
-    print("to: %s" % dst)
-    #copytree(src, dst)
+    copytree(src, dst)
 
 ####################################################################################
 # create mount point and local backup folders
