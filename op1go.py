@@ -41,18 +41,15 @@ def wait_for_connection():
 
 # mounting
 def mountdevice(source, target, fs, options=''):
-  ret = ctypes.CDLL('libc.so.6', use_errno=True).mount(source, target, fs, 0, options)
-  if ret < 0:
-    errno = ctypes.get_errno()
-    raise RuntimeError("Error mounting {} ({}) on {} with options '{}': {}".
-     format(source, fs, target, options, os.strerror(errno)))
+  ret = os.system('mount {} {}'.format(source, target))
+  if ret != 0:
+    raise RuntimeError("Error mounting {} on {}: {}".format(source, target, ret))
+
 
 def unmountdevice(target):
-  ret = ctypes.CDLL('libc.so.6', use_errno=True).umount(target, None)
-  if ret < 0:
-    errno = ctypes.get_errno()
-    raise RuntimeError("Error unmounting {}: {}".
-     format(target, os.strerror(errno)))
+  ret = os.system('umount {}'.format(target))
+  if ret != 0:
+    raise RuntimeError("Error unmounting {}: {}".format(target, ret))
 
 def getmountpath():
   o = os.popen('readlink -f /dev/disk/by-id/' + USBID_OP1).read()
