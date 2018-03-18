@@ -76,7 +76,7 @@ def copytree(src, dst, symlinks=False, ignore=None):
       shutil.copytree(s, d, symlinks, ignore)
     else:
       shutil.copy2(s, d)
-            
+
 def backup_files(source, destination): 
   dstroot = os.path.join(destination, datetime.now().strftime(BACKUP_DIR_FORMAT))
   forcedir(dstroot)
@@ -86,15 +86,43 @@ def backup_files(source, destination):
     print(" . from: {} to {}".format(src, dst))
     forcedir(dst)
     copytree(src, dst)
+    blink(1)
+
+# misc
+def blink(count):
+  os.system("echo none | sudo tee /sys/class/leds/led0/trigger >/dev/null 2>&1")
+  for i in range(0,count):
+    os.system("echo 0 | sudo tee /sys/class/leds/led0/brightness >/dev/null 2>&1")
+    time.sleep(0.15)
+    os.system("echo 1 | sudo tee /sys/class/leds/led0/brightness >/dev/null 2>&1")
+    time.sleep(0.05)
+
+def blinklong():
+  os.system("echo none | sudo tee /sys/class/leds/led0/trigger >/dev/null 2>&1")
+  os.system("echo 0 | sudo tee /sys/class/leds/led0/brightness >/dev/null 2>&1")
+  time.sleep(1)
+  os.system("echo 1 | sudo tee /sys/class/leds/led0/brightness >/dev/null 2>&1")
+
+def blinkyay():
+  os.system("echo none | sudo tee /sys/class/leds/led0/trigger >/dev/null 2>&1")
+  for i in range(0,1000000):
+    os.system("echo 0 | sudo tee /sys/class/leds/led0/brightness >/dev/null 2>&1")
+    time.sleep(0.01)
+    os.system("echo 1 | sudo tee /sys/class/leds/led0/brightness >/dev/null 2>&1")
+    time.sleep(0.01)
+
 
 ####################################################################################
 # create mount point and local backup folders
+
+blinklong()
 forcedir(BACKUPS_DIR)
 forcedir(MOUNT_DIR)
 
 # wait until OP-1 is connected
 print(" > Starting - waiting for OP-1 to connect")
 ensure_connection()
+time.sleep(5)
 
 # mount OP-1
 mountpath = getmountpath()
@@ -103,6 +131,7 @@ mountdevice(mountpath, MOUNT_DIR, 'ext4', 'rw')
 print(" > Device mounted at %s" % MOUNT_DIR)
 
 # copy files to local storage
+blink(5)
 print(" > Copying files...")
 backup_files(MOUNT_DIR, BACKUPS_DIR)
 
@@ -110,5 +139,6 @@ backup_files(MOUNT_DIR, BACKUPS_DIR)
 print(" > Unmounting OP-1")
 unmountdevice(MOUNT_DIR)
 print(" > Done.")
+blinkyay()
 
 
