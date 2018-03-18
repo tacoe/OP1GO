@@ -18,7 +18,7 @@ USBID_OP1 = "*Teenage_OP-1*"
 OP1_BASE_DIRS = set(['tape', 'album', 'synth', 'drum'])
 MOUNT_DIR = "/media/op1"
 BACKUP_DIR_FORMAT = "%Y-%m-%d (%H%M%S)"
-HOME = os.path.join(os.getenv("HOME"), "op1go-backups")
+HOME = "/op1go"
 BACKUPS_DIR = os.path.join(HOME, "backups")
 
 # OP-1 connection
