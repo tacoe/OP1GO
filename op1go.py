@@ -104,7 +104,7 @@ ensure_connection()
 # mount OP-1
 mountpath = getmountpath()
 print("Mountpath: %s" % mountpath)
-mountdevice(mountpath, MOUNT_DIR, 'ext 4', 'rw')
+mountdevice(mountpath, MOUNT_DIR, 'ext4', 'rw')
 
 # copy files to local storage
 backup_files(MOUNT_DIR, BACKUPS_DIR)
