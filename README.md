@@ -2,6 +2,8 @@
 
 Ultraportable backups for Teenage Engineering's OP-1.
 
+![OP1GO on a Pi Zero](https://i.imgur.com/txgngQ7.jpg)
+
 ## Setup
 
 * This setup assumes MacOS. We'll configure the Raspberry Pi for a headless, networking-less setup. You can simply SSH into your raspberry pi transparently over the USB cable (the OS takes care of mapping `raspberrypi.local` for you).
@@ -21,18 +23,18 @@ Ultraportable backups for Teenage Engineering's OP-1.
 * `cd op1go`
 * `sudo pip3 install pyusb` (the `sudo` is needed because the script itself needs root access)
 * `sudo nano /etc/rc.local`, then add a new line `sudo python3 /home/pi/op1go/op1go.py &` (towards the end, before the `exit` statement) and save
-* `sudo nano sudo vi /etc/netatalk/AppleVolumes.default` then add a new line `/op1go` at the end of the file and save
-* Unplug the Pi from your Mac.
+* `sudo nano /etc/netatalk/AppleVolumes.default`, then add a new line `/op1go` at the end of the file and save
+* Unplug the Pi from your Mac -- it's now ready for use.
 
 ## Usage
 
-*WARNING: This is not tested extensively, or even at all. Please don't count on this tool for anything serious.*
+*WARNING: This is not tested extensively. Don't count on this tool for anything serious.*
 
 While on vacation, and it's time to back up that OP-1 (when the tape is full, or both album sides used, when got some brilliant presets, whatever), plug your Pi Zero in a wallcharger (micro-USB port marked 'PWR'), and connect the OP-1 to it (micro-USB port marked 'USB'). Wait for the green LED on the Pi to turn off for a while. Now set the OP-1 into disk mode (shift-COM, then 3). After a while the Pi's LED will blink and it will start copying. It'll blink a few times as it goes. When it's done (this will take a few minutes), the Pi will start blinking rapidly and evenly. This means it's done. You can now disconnect everything. Next time, just rinse and repeat. OP1GO will make a new backup folder every time.
 
 *If after a long time (>10 minutes) your Pi still isn't blinking rapidly, do NOT assume the backup was successful.*
 
-When you return home, open Finder, hit cmd-K and enter `afp://raspberrypi.local`, login with `raspberry` and `pi` or whatever you changed the password to, select the `op1go` share. Now you'll see your backups and you can copy them to your Mac.
+When you return home, open Finder, hit cmd-K and enter `afp://raspberrypi.local`, login with `raspberry` and `pi` (or whatever you changed the password to), select the `op1go` share. Now you'll see your backups and you can copy them to your Mac.
 
 ## Misc
 
