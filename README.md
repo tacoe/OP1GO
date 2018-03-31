@@ -1,6 +1,6 @@
 # OP1GO
 
-Ultraportable backups for Teenage Engineering's OP-1 with this tool and a Raspberry Pi Zero.
+Ultraportable backups for Teenage Engineering's OP-1.
 
 ## Setup
 
@@ -24,7 +24,7 @@ Ultraportable backups for Teenage Engineering's OP-1 with this tool and a Raspbe
 
 ## Usage
 
-*WARNING: This is not tested extensively, or even at all. See the disclaimer below. Please don't count on this tool for anything serious. Notably, don't count on this tool for not losing any of your brilliant music.*
+*WARNING: This is not tested extensively, or even at all. Please don't count on this tool for anything serious.*
 
 While on vacation, and it's time to back up that OP-1 (when the tape is full, or both album sides used, when got some brilliant presets, whatever), plug your Pi Zero in a wallcharger (micro-USB port marked 'PWR'), and connect the OP-1 to it (micro-USB port marked 'USB'). Wait for the green LED on the Pi to turn off for a while. Now set the OP-1 into disk mode (shift-COM, then 3). After a while the Pi's LED will blink and it will start copying. It'll blink a few times as it goes. When it's done (this will take a few minutes), the Pi will start blinking rapidly and evenly. This means it's done. You can now disconnect everything. Next time, just rinse and repeat. OP1GO will make a new backup folder every time. 
 
@@ -32,8 +32,8 @@ While on vacation, and it's time to back up that OP-1 (when the tape is full, or
 
 When you return home, SSH into your Zero, and find your backups in `/op1go/backups` ordered by date/time. You can then `scp` them back to your Mac, for example.
 
-## Disclaimer
+## Misc
 
-Copyright © 2018 Taco Ekkel. Uses bits of code from James McGinty's neat opie.
+Uses code from James McGinty's neat opie.
 
-THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+The software is provided “as is”, without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and noninfringement. In no event shall the authors or copyright holders be liable for any claim, damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the software or the use or other dealings in the software.
