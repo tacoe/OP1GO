@@ -17,12 +17,18 @@ Ultraportable backups for Teenage Engineering's OP-1.
 * Eject the card
 * Start the Raspberry Pi while connected to your Mac's USB and give it a bit of time to get through first boot.
 * Connect to it using `ssh pi@raspberrypi.local` and the default password (`raspberry`). Might want to change the password at this step (use `passwd`).
+* In order for the Pi Zero to access the internet you might have to turn on MacOS internet sharing (System Preferences > General > Sharing) to 'RNDIS/Ethernet gadget'
 * `sudo apt-get update`
 * `sudo apt-get install python3-pip git netatalk`
 * `git clone https://github.com/tacoe/op1go`
 * `cd op1go`
 * `sudo pip3 install pyusb` (the `sudo` is needed because the script itself needs root access)
 * `sudo nano /etc/rc.local`, then add a new line `sudo python3 /home/pi/op1go/op1go.py &` (towards the end, before the `exit` statement) and save
+* `sudo nano /etc/netatalk/afp.conf`, then add two lines:
+```
+[op1go]
+path = /op1go
+```
 * `sudo nano /etc/netatalk/AppleVolumes.default`, then add a new line `/op1go` at the end of the file and save
 * Unplug the Pi from your Mac -- it's now ready for use.
 
